@@ -1,0 +1,55 @@
+name: flutter_app_template
+
+packages:
+  - packages/**
+
+scripts:
+  version:
+    run: melos exec  --flutter -- "flutter --version"
+    description: Flutter SDK version for each package
+
+  upgrade:
+    run: |
+      melos exec -- \
+        flutter pub upgrade --major-versions
+    description: Upgrade the major version of the pub in all packages
+
+  analyze:
+    run: |
+      melos exec -- \
+        flutter analyze . --fatal-infos
+    description: Analyze in all packages
+
+  format:
+    run: |
+      melos exec -- \
+        flutter format --dry-run --set-exit-if-changed lib/
+    description: Format in all packages
+
+  gen:all:
+    run: |
+      melos exec -c 1 --depends-on="build_runner" -- \
+        flutter pub run build_runner build --delete-conflicting-outputs
+    description: Generate code in all packages
+
+  gen:
+    run: |
+      melos exec -c 1 -- \
+        flutter pub run build_runner build --delete-conflicting-outputs
+    description: コード生成したいパッケージを選択して実行する
+    select-package:
+      dir-exists: lib
+      depends-on: "build_runner"
+
+  test:
+    run: |
+      melos exec --dir-exists="test" --fail-fast -- \
+        flutter test --coverage
+    description: flutter test in all packages
+
+  upload:ios:prod:
+    run: |
+      melos exec -c 1 --depends-on="build_runner" --flutter -- \
+        flutter build ipa --dart-define=FLAVOR=prod --export-options-plist="ios/prod/ExportOptions.plist"
+    select-package:
+      dir-exists: lib
