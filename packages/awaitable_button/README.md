@@ -17,7 +17,7 @@ import 'package:awaitable_button/awaitable_button.dart';
 ```dart
 @override
 Widget build(BuildContext context) {
-    return AwaitableButton<String>(
+    return AwaitableElevatedButton<String>(
       // Required
       onPressed: () {
         // do something
@@ -27,7 +27,36 @@ Widget build(BuildContext context) {
         // do something (Optional)
       },
       // Optional
+      buttonStyle: ElevatedButton.styleFrom(),
+      // Optional
+      indicator: CircularProgressIndicator(),
+      // Optional
       executingChild: const Text('Executing...'),
+      // Required
+      child: const Text('Button'),
+    );
+}
+```
+
+```dart
+@override
+Widget build(BuildContext context) {
+    return AwaitableTextButton<String>(
+      // Required
+      onPressed: () {
+        // do something
+      },
+      // Optional
+      whenComplete: (value) {
+        // do something (Optional)
+      },
+      // Optional
+      buttonStyle: TextButton.styleFrom(),
+      // Optional
+      indicator: CircularProgressIndicator(),
+      // Optional
+      executingChild: const Text('Executing...'),
+      // Required
       child: const Text('Button'),
     );
 }

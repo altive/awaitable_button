@@ -24,7 +24,10 @@ class AwaitableIconButton<R> extends StatefulWidget {
     this.indicatorColor,
     this.indicator,
     required this.icon,
-  })  : assert(indicatorColor == null || indicator == null),
+  })  : assert(
+          indicatorColor == null || indicator == null,
+          'Cannot specify both',
+        ),
         super(key: key);
 
   /// Called when the button is tapped or otherwise activated.
@@ -35,6 +38,7 @@ class AwaitableIconButton<R> extends StatefulWidget {
   /// Receive the return value of [onPressed].
   final void Function(R)? whenComplete;
 
+  /// Size of the IconButton icon.
   final double? iconSize;
 
   /// Indicator color during asynchronous processing.

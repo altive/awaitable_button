@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-/// 実行中に表示するインジケータ
+/// Indicator to be displayed during execution of asynchronous processing.
 class Indicator extends StatelessWidget {
+  /// Create an Indicator.
   const Indicator({
     Key? key,
     this.color,
   }) : super(key: key);
 
+  /// CircularProgressIndicator Color.
   final Color? color;
 
   @override

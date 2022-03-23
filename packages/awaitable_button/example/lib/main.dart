@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:math';
 
 import 'package:awaitable_button/awaitable_button.dart';
@@ -43,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
         children: <Widget>[
-          AwaitableButton<void>(
+          AwaitableElevatedButton<void>(
             onPressed: () async {
               await Future<void>.delayed(const Duration(seconds: 2));
             },
@@ -61,14 +63,70 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: const Text('After processing, go to the next page'),
           ),
-          AwaitableButton<void>(
+          AwaitableElevatedButton<void>(
             onPressed: () async {
               await Future<void>.delayed(const Duration(seconds: 2));
             },
             executingChild: const Text('Executing...'),
             child: const Text('Executing Text'),
           ),
-          AwaitableButton<String>(
+          AwaitableElevatedButton<String>(
+            onPressed: () async {
+              try {
+                await Future<void>.delayed(const Duration(seconds: 2));
+                if (Random().nextBool()) {
+                  return 'Succeeded';
+                } else {
+                  throw Exception();
+                }
+              } on Exception {
+                return 'Failed';
+              }
+            },
+            whenComplete: (value) {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(value),
+                    actions: [
+                      TextButton(
+                        onPressed: Navigator.of(context).pop,
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Text('Success or Failure'),
+          ),
+          AwaitableTextButton<void>(
+            onPressed: () async {
+              await Future<void>.delayed(const Duration(seconds: 2));
+            },
+            whenComplete: (_) {
+              Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Scaffold(
+                      appBar: AppBar(),
+                      body: const Center(child: Text('Next page')),
+                    );
+                  },
+                ),
+              );
+            },
+            child: const Text('After processing, go to the next page'),
+          ),
+          AwaitableTextButton<void>(
+            onPressed: () async {
+              await Future<void>.delayed(const Duration(seconds: 2));
+            },
+            executingChild: const Text('Executing...'),
+            child: const Text('Executing Text'),
+          ),
+          AwaitableTextButton<String>(
             onPressed: () async {
               try {
                 await Future<void>.delayed(const Duration(seconds: 2));

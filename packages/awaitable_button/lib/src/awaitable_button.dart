@@ -2,6 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'indicator.dart';
 
+/// ButtonType has ElevatedButton, OutlinedButton, TextButton types.
+enum ButtonType {
+  /// Use ElevatedButton
+  elevated,
+
+  /// Use OutlinedButton
+  outlined,
+
+  /// Use TextButton
+  text,
+}
+
+extension on ButtonType {
+  bool get isElevated => this == ButtonType.elevated;
+}
+
 /// Button with indicator display during processing to prevent consecutive hits.
 ///
 /// Setting an asynchronous function to [onPressed] will display an indicator
@@ -13,12 +29,13 @@ import 'indicator.dart';
 /// with the running indicator.
 /// If [buttonStyle] is not specified, the value set in Theme
 /// Use `ElevatedButtonThemeData` in `Theme.of(context)`.
-class AwaitableButton<R> extends StatefulWidget {
+abstract class AwaitableButton<R> extends StatefulWidget {
   /// Create an AwaitableButton.
   ///
   /// [child] arguments must not be null.
   const AwaitableButton({
     Key? key,
+    required this.buttonType,
     required this.onPressed,
     this.whenComplete,
     this.buttonStyle,
@@ -26,8 +43,14 @@ class AwaitableButton<R> extends StatefulWidget {
     this.indicator,
     this.executingChild,
     required this.child,
-  })  : assert(indicatorColor == null || indicator == null),
+  })  : assert(
+          indicatorColor == null || indicator == null,
+          'Cannot specify both',
+        ),
         super(key: key);
+
+  /// ButtonType has ElevatedButton, OutlinedButton, TextButton types.
+  final ButtonType buttonType;
 
   /// Called when the button is tapped or otherwise activated.
   /// Return values can be used to pass values to [whenComplete].
@@ -67,32 +90,53 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
 
   @override
   Widget build(BuildContext context) {
+    final onPressed = widget.onPressed == null ? null : _onPressed;
+    final style =
+        widget.buttonStyle ?? Theme.of(context).elevatedButtonTheme.style;
     final indicator = widget.indicator ??
         Indicator(
-          color:
-              widget.indicatorColor ?? Theme.of(context).colorScheme.onPrimary,
+          color: widget.indicatorColor ??
+              (widget.buttonType.isElevated
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.primary),
         );
-
     final executingIcon = widget.executingChild;
-    return ElevatedButton(
-      onPressed: widget.onPressed == null ? null : _onPressed,
-      style: widget.buttonStyle ?? Theme.of(context).elevatedButtonTheme.style,
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 400),
-        child: _isExecuting
-            ? executingIcon == null
-                ? indicator
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      indicator,
-                      const SizedBox(width: 8),
-                      executingIcon,
-                    ],
-                  )
-            : widget.child,
-      ),
+    final child = AnimatedSwitcher(
+      duration: const Duration(milliseconds: 400),
+      child: _isExecuting
+          ? executingIcon == null
+              ? indicator
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    indicator,
+                    const SizedBox(width: 8),
+                    executingIcon,
+                  ],
+                )
+          : widget.child,
     );
+
+    switch (widget.buttonType) {
+      case ButtonType.elevated:
+        return ElevatedButton(
+          onPressed: onPressed,
+          style: style,
+          child: child,
+        );
+      case ButtonType.outlined:
+        return OutlinedButton(
+          onPressed: onPressed,
+          style: style,
+          child: child,
+        );
+      case ButtonType.text:
+        return TextButton(
+          onPressed: onPressed,
+          style: style,
+          child: child,
+        );
+    }
   }
 
   Future<void> _onPressed() async {
