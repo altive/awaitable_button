@@ -1,6 +1,10 @@
+## 0.2.0
+
+- Added `onError` .
+
 ## 0.1.0
 
-- Removed `AwaitableButton`
+- Removed `AwaitableButton` .
 
 - Added `AwaitableElevatedButton` and `AwaitableTextButton` .
 

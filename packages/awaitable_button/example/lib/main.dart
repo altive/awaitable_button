@@ -43,8 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('awaitable_button'),
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+        padding: const EdgeInsets.all(16),
         children: <Widget>[
+          Text(
+            'AwaitableElevatedButton',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          const Text(
+            'Screen transition after processing is completed',
+          ),
           AwaitableElevatedButton<void>(
             onPressed: () async {
               await Future<void>.delayed(const Duration(seconds: 2));
@@ -63,12 +70,18 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: const Text('After processing, go to the next page'),
           ),
+          const Text(
+            'Can change the text being processed',
+          ),
           AwaitableElevatedButton<void>(
             onPressed: () async {
               await Future<void>.delayed(const Duration(seconds: 2));
             },
             executingChild: const Text('Executing...'),
             child: const Text('Executing Text'),
+          ),
+          const Text(
+            'Pass the result of processing to [whenComplete]',
           ),
           AwaitableElevatedButton<String>(
             onPressed: () async {
@@ -101,50 +114,29 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: const Text('Success or Failure'),
           ),
-          AwaitableTextButton<void>(
+          const Text(
+            'Handling Exceptions with [onError]',
+          ),
+          AwaitableElevatedButton<void>(
             onPressed: () async {
               await Future<void>.delayed(const Duration(seconds: 2));
-            },
-            whenComplete: (_) {
-              Navigator.of(context).push<void>(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return Scaffold(
-                      appBar: AppBar(),
-                      body: const Center(child: Text('Next page')),
-                    );
-                  },
-                ),
-              );
-            },
-            child: const Text('After processing, go to the next page'),
-          ),
-          AwaitableTextButton<void>(
-            onPressed: () async {
-              await Future<void>.delayed(const Duration(seconds: 2));
-            },
-            executingChild: const Text('Executing...'),
-            child: const Text('Executing Text'),
-          ),
-          AwaitableTextButton<String>(
-            onPressed: () async {
-              try {
-                await Future<void>.delayed(const Duration(seconds: 2));
-                if (Random().nextBool()) {
-                  return 'Succeeded';
-                } else {
-                  throw Exception();
-                }
-              } on Exception {
-                return 'Failed';
+              if (Random().nextBool()) {
+                return;
+              } else {
+                throw Exception();
               }
             },
-            whenComplete: (value) {
+            onError: (exception, stackTrace) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('$exception, $stackTrace')),
+              );
+            },
+            whenComplete: (_) {
               showDialog<void>(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text(value),
+                    title: const Text('Succeeded'),
                     actions: [
                       TextButton(
                         onPressed: Navigator.of(context).pop,
@@ -156,6 +148,26 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
             child: const Text('Success or Failure'),
+          ),
+          const Divider(),
+          Text(
+            'AwaitableTextButton',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          const Text(
+            'It is the same as [AwaitableElevatedButton] except for the style.',
+          ),
+          AwaitableTextButton<void>(
+            onPressed: () async {
+              await Future<void>.delayed(const Duration(seconds: 2));
+            },
+            executingChild: const Text('Executing...'),
+            child: const Text('Executing Text'),
+          ),
+          const Divider(),
+          Text(
+            'AwaitableIconButton',
+            style: Theme.of(context).textTheme.headline6,
           ),
           AwaitableIconButton<void>(
             onPressed: () async {

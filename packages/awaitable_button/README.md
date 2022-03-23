@@ -24,7 +24,11 @@ Widget build(BuildContext context) {
       },
       // Optional
       whenComplete: (value) {
-        // do something (Optional)
+        // do something
+      },
+      // Optional
+      onError: (exception, stackTrace) {
+        // do something
       },
       // Optional
       buttonStyle: ElevatedButton.styleFrom(),
@@ -49,6 +53,10 @@ Widget build(BuildContext context) {
       // Optional
       whenComplete: (value) {
         // do something (Optional)
+      },
+      // Optional
+      onError: (exception, stackTrace) {
+        // do something
       },
       // Optional
       buttonStyle: TextButton.styleFrom(),

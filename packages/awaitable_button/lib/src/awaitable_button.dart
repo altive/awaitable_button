@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'indicator.dart';
 
+/// `onPressed` callback type.
+typedef OnPressed<R> = Future<R> Function()?;
+
+/// `whenComplete` callback type.
+typedef WhenComplete<R> = void Function(R)?;
+
+/// `onError` callback type.
+typedef OnError = void Function(Exception, StackTrace)?;
+
 /// ButtonType has ElevatedButton, OutlinedButton, TextButton types.
 enum ButtonType {
   /// Use ElevatedButton
@@ -38,6 +47,7 @@ abstract class AwaitableButton<R> extends StatefulWidget {
     required this.buttonType,
     required this.onPressed,
     this.whenComplete,
+    this.onError,
     this.buttonStyle,
     this.indicatorColor,
     this.indicator,
@@ -54,11 +64,14 @@ abstract class AwaitableButton<R> extends StatefulWidget {
 
   /// Called when the button is tapped or otherwise activated.
   /// Return values can be used to pass values to [whenComplete].
-  final Future<R> Function()? onPressed;
+  final OnPressed<R> onPressed;
 
   /// Callback when [onPressed] completes without throwing an exception.
   /// Receive the return value of [onPressed].
-  final void Function(R)? whenComplete;
+  final WhenComplete<R> whenComplete;
+
+  /// Callback when [onPressed] throws an exception.
+  final OnError onError;
 
   /// Customizes this button's appearance.
   ///
@@ -149,6 +162,8 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
     try {
       final r = await widget.onPressed!.call();
       widget.whenComplete?.call(r);
+    } on Exception catch (e, s) {
+      widget.onError?.call(e, s);
     } finally {
       // Check for presence before execution in case you come back
       // from a screen transition, etc.

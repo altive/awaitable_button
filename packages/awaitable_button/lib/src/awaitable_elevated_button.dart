@@ -19,8 +19,9 @@ class AwaitableElevatedButton<R> extends AwaitableButton<R> {
   /// [child] arguments must not be null.
   const AwaitableElevatedButton({
     Key? key,
-    required Future<R> Function()? onPressed,
-    void Function(R)? whenComplete,
+    OnPressed<R> onPressed,
+    WhenComplete<R> whenComplete,
+    OnError onError,
     ButtonStyle? buttonStyle,
     Color? indicatorColor,
     Widget? indicator,
@@ -31,6 +32,7 @@ class AwaitableElevatedButton<R> extends AwaitableButton<R> {
           buttonType: ButtonType.elevated,
           onPressed: onPressed,
           whenComplete: whenComplete,
+          onError: onError,
           buttonStyle: buttonStyle,
           indicatorColor: indicatorColor,
           indicator: indicator,
