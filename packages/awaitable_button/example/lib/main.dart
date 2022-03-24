@@ -121,8 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () async {
               await Future<void>.delayed(const Duration(seconds: 2));
               if (Random().nextBool()) {
-                return;
-              } else {
                 throw Exception();
               }
             },
@@ -169,11 +167,41 @@ class _MyHomePageState extends State<MyHomePage> {
             'AwaitableIconButton',
             style: Theme.of(context).textTheme.headline6,
           ),
+          const Text(
+            'Success or Failure handling',
+          ),
           AwaitableIconButton<void>(
             onPressed: () async {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(const Duration(seconds: 2));
+              if (Random().nextBool()) {
+                throw Exception();
+              }
+            },
+            whenComplete: (_) {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Succeeded'),
+                    actions: [
+                      TextButton(
+                        onPressed: Navigator.of(context).pop,
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            onError: (exception, stackTrace) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('$exception, $stackTrace')),
+              );
             },
             icon: const Icon(Icons.timer),
+          ),
+          const Text(
+            'Can change the icon being processed',
           ),
           AwaitableIconButton<void>(
             onPressed: () async {

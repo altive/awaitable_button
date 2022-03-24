@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'awaitable_button.dart';
 import 'indicator.dart';
 
 /// Button with indicator display during processing to prevent consecutive hits.
@@ -19,6 +20,7 @@ class AwaitableIconButton<R> extends StatefulWidget {
     Key? key,
     required this.onPressed,
     this.whenComplete,
+    this.onError,
     this.executingIcon,
     this.iconSize,
     this.indicatorColor,
@@ -32,11 +34,14 @@ class AwaitableIconButton<R> extends StatefulWidget {
 
   /// Called when the button is tapped or otherwise activated.
   /// Return values can be used to pass values to [whenComplete].
-  final Future<R> Function()? onPressed;
+  final OnPressed<R> onPressed;
 
   /// Callback when [onPressed] completes without throwing an exception.
   /// Receive the return value of [onPressed].
-  final void Function(R)? whenComplete;
+  final WhenComplete<R> whenComplete;
+
+  /// Callback when [onPressed] throws an exception.
+  final OnError onError;
 
   /// Size of the IconButton icon.
   final double? iconSize;
@@ -104,6 +109,8 @@ class _AwaitableIconButtonState<R> extends State<AwaitableIconButton<R>> {
     try {
       final r = await widget.onPressed!.call();
       widget.whenComplete?.call(r);
+    } on Exception catch (e, s) {
+      widget.onError?.call(e, s);
     } finally {
       // Check for presence before execution in case you come back
       // from a screen transition, etc.

@@ -1,3 +1,8 @@
+## 0.3.0
+
+- Added `AwaitableOutlinedButton` .
+- Added `onError` to `AwaitableIconButton`.
+
 ## 0.2.0
 
 - Added `onError` .

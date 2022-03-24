@@ -45,6 +45,34 @@ Widget build(BuildContext context) {
 ```dart
 @override
 Widget build(BuildContext context) {
+    return AwaitableOutlinedButton<String>(
+      // Required
+      onPressed: () {
+        // do something
+      },
+      // Optional
+      whenComplete: (value) {
+        // do something (Optional)
+      },
+      // Optional
+      onError: (exception, stackTrace) {
+        // do something
+      },
+      // Optional
+      buttonStyle: OutlinedButton.styleFrom(),
+      // Optional
+      indicator: CircularProgressIndicator(),
+      // Optional
+      executingChild: const Text('Executing...'),
+      // Required
+      child: const Text('Button'),
+    );
+}
+```
+
+```dart
+@override
+Widget build(BuildContext context) {
     return AwaitableTextButton<String>(
       // Required
       onPressed: () {
