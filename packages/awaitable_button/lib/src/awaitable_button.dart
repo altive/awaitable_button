@@ -1,27 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'button_type.dart';
+import 'extensions.dart';
 import 'indicator.dart';
-
-/// `onPressed` callback type.
-typedef OnPressed<R> = Future<R> Function()?;
-
-/// `whenComplete` callback type.
-typedef WhenComplete<R> = void Function(R)?;
-
-/// `onError` callback type.
-typedef OnError = void Function(Exception, StackTrace)?;
-
-/// ButtonType has ElevatedButton, OutlinedButton, TextButton types.
-enum ButtonType {
-  /// Use ElevatedButton
-  elevated,
-
-  /// Use OutlinedButton
-  outlined,
-
-  /// Use TextButton
-  text,
-}
 
 extension on ButtonType {
   bool get isElevated => this == ButtonType.elevated;
@@ -104,8 +85,6 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
   @override
   Widget build(BuildContext context) {
     final onPressed = widget.onPressed == null ? null : _onPressed;
-    final style =
-        widget.buttonStyle ?? Theme.of(context).elevatedButtonTheme.style;
     final indicator = widget.indicator ??
         Indicator(
           color: widget.indicatorColor ??
@@ -130,23 +109,34 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
           : widget.child,
     );
 
+    final splashFactory = _isExecuting ? NoSplash.splashFactory : null;
+
     switch (widget.buttonType) {
       case ButtonType.elevated:
         return ElevatedButton(
           onPressed: onPressed,
-          style: style,
+          style: widget.buttonStyle?.copyWith(splashFactory: splashFactory) ??
+              Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                    splashFactory: splashFactory,
+                  ),
           child: child,
         );
       case ButtonType.outlined:
         return OutlinedButton(
           onPressed: onPressed,
-          style: style,
+          style: widget.buttonStyle?.copyWith(splashFactory: splashFactory) ??
+              Theme.of(context).outlinedButtonTheme.style?.copyWith(
+                    splashFactory: splashFactory,
+                  ),
           child: child,
         );
       case ButtonType.text:
         return TextButton(
           onPressed: onPressed,
-          style: style,
+          style: widget.buttonStyle?.copyWith(splashFactory: splashFactory) ??
+              Theme.of(context).textButtonTheme.style?.copyWith(
+                    splashFactory: splashFactory,
+                  ),
           child: child,
         );
     }

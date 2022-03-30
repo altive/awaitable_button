@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'awaitable_button.dart';
+import 'button_type.dart';
+import 'extensions.dart';
 
 /// Button with indicator display during processing to prevent consecutive hits.
 ///

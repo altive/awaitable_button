@@ -1,3 +1,6 @@
+## 0.4.0
+- Changed Splash to be hidden during button processing.
+
 ## 0.3.1
 
 - Added `AwaitableOutlinedButton` .
