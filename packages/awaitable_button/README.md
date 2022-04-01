@@ -4,6 +4,9 @@
 
 Button with indicator display during processing to prevent consecutive hits.
 
+## Web demo for awaitable_button/example
+https://altive.github.io/flutter_widgets/
+
 ## Getting started
 
 ```pubspec.yaml

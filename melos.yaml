@@ -47,9 +47,9 @@ scripts:
         flutter test --coverage
     description: flutter test in all packages
 
-  upload:ios:prod:
+  build:
     run: |
-      melos exec -c 1 --depends-on="build_runner" --flutter -- \
-        flutter build ipa --dart-define=FLAVOR=prod --export-options-plist="ios/prod/ExportOptions.plist"
-    select-package:
-      dir-exists: lib
+      melos exec -c 1 --dir-exists="web" --flutter -- \
+        flutter build web --web-renderer html
+    # select-package:
+    #   dir-exists: lib
