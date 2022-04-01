@@ -21,7 +21,7 @@ class AwaitableTextButton<R> extends AwaitableButton<R> {
   /// [child] arguments must not be null.
   const AwaitableTextButton({
     Key? key,
-    OnPressed<R> onPressed,
+    required OnPressed<R> onPressed,
     WhenComplete<R> whenComplete,
     OnError onError,
     ButtonStyle? buttonStyle,

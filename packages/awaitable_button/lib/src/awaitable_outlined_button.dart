@@ -21,7 +21,7 @@ class AwaitableOutlinedButton<R> extends AwaitableButton<R> {
   /// [child] arguments must not be null.
   const AwaitableOutlinedButton({
     Key? key,
-    OnPressed<R> onPressed,
+    required OnPressed<R> onPressed,
     WhenComplete<R> whenComplete,
     OnError onError,
     ButtonStyle? buttonStyle,
