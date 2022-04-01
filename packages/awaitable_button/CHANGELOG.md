@@ -1,3 +1,11 @@
+## 0.4.1
+
+ - **REFACTOR**: add tests.
+ - **REFACTOR**: add required to onPressed.
+ - **REFACTOR**: use awaitable mixin.
+ - **FIX**: remove base href from index.html.
+ - **FEAT**: add web demo.
+
 ## 0.4.0
 - Changed Splash to be hidden during button processing.
 
