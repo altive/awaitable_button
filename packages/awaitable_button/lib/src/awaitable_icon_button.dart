@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'awaitable.dart';
 import 'extensions.dart';
 import 'indicator.dart';
 
@@ -68,8 +69,16 @@ class AwaitableIconButton<R> extends StatefulWidget {
   _AwaitableIconButtonState<R> createState() => _AwaitableIconButtonState<R>();
 }
 
-class _AwaitableIconButtonState<R> extends State<AwaitableIconButton<R>> {
-  var _isExecuting = false;
+class _AwaitableIconButtonState<R> extends State<AwaitableIconButton<R>>
+    with Awaitable<AwaitableIconButton<R>, R> {
+  @override
+  OnPressed<R>? get onPressed => widget.onPressed;
+
+  @override
+  WhenComplete<R>? get whenComplete => widget.whenComplete;
+
+  @override
+  OnError? get onError => widget.onError;
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +88,11 @@ class _AwaitableIconButtonState<R> extends State<AwaitableIconButton<R>> {
         );
     final executingIcon = widget.executingIcon;
     return IconButton(
-      onPressed: widget.onPressed == null ? null : _onPressed,
+      onPressed: onPressed == null ? null : execute,
       iconSize: widget.iconSize,
       icon: AnimatedSwitcher(
         duration: const Duration(milliseconds: 400),
-        child: _isExecuting
+        child: processing
             ? executingIcon == null
                 ? indicator
                 : Row(
@@ -97,26 +106,5 @@ class _AwaitableIconButtonState<R> extends State<AwaitableIconButton<R>> {
             : widget.icon,
       ),
     );
-  }
-
-  Future<void> _onPressed() async {
-    if (_isExecuting) {
-      // Do nothing while button action is being executed
-      // (to prevent consecutive hits)
-      return;
-    }
-    setState(() => _isExecuting = true);
-    try {
-      final r = await widget.onPressed!.call();
-      widget.whenComplete?.call(r);
-    } on Exception catch (e, s) {
-      widget.onError?.call(e, s);
-    } finally {
-      // Check for presence before execution in case you come back
-      // from a screen transition, etc.
-      if (mounted) {
-        setState(() => _isExecuting = false);
-      }
-    }
   }
 }

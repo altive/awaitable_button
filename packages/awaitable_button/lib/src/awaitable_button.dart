@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'awaitable.dart';
 import 'button_type.dart';
 import 'extensions.dart';
 import 'indicator.dart';
@@ -79,12 +80,19 @@ abstract class AwaitableButton<R> extends StatefulWidget {
   _AwaitableButtonState<R> createState() => _AwaitableButtonState<R>();
 }
 
-class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
-  var _isExecuting = false;
+class _AwaitableButtonState<R> extends State<AwaitableButton<R>>
+    with Awaitable<AwaitableButton<R>, R> {
+  @override
+  OnPressed<R>? get onPressed => widget.onPressed;
+
+  @override
+  WhenComplete<R>? get whenComplete => widget.whenComplete;
+
+  @override
+  OnError? get onError => widget.onError;
 
   @override
   Widget build(BuildContext context) {
-    final onPressed = widget.onPressed == null ? null : _onPressed;
     final indicator = widget.indicator ??
         Indicator(
           color: widget.indicatorColor ??
@@ -95,7 +103,7 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
     final executingIcon = widget.executingChild;
     final child = AnimatedSwitcher(
       duration: const Duration(milliseconds: 400),
-      child: _isExecuting
+      child: processing
           ? executingIcon == null
               ? indicator
               : Row(
@@ -109,12 +117,13 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
           : widget.child,
     );
 
-    final splashFactory = _isExecuting ? NoSplash.splashFactory : null;
+    final p = onPressed == null ? null : execute;
+    final splashFactory = processing ? NoSplash.splashFactory : null;
 
     switch (widget.buttonType) {
       case ButtonType.elevated:
         return ElevatedButton(
-          onPressed: onPressed,
+          onPressed: p,
           style: widget.buttonStyle?.copyWith(splashFactory: splashFactory) ??
               Theme.of(context).elevatedButtonTheme.style?.copyWith(
                     splashFactory: splashFactory,
@@ -123,7 +132,7 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
         );
       case ButtonType.outlined:
         return OutlinedButton(
-          onPressed: onPressed,
+          onPressed: p,
           style: widget.buttonStyle?.copyWith(splashFactory: splashFactory) ??
               Theme.of(context).outlinedButtonTheme.style?.copyWith(
                     splashFactory: splashFactory,
@@ -132,34 +141,13 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>> {
         );
       case ButtonType.text:
         return TextButton(
-          onPressed: onPressed,
+          onPressed: p,
           style: widget.buttonStyle?.copyWith(splashFactory: splashFactory) ??
               Theme.of(context).textButtonTheme.style?.copyWith(
                     splashFactory: splashFactory,
                   ),
           child: child,
         );
-    }
-  }
-
-  Future<void> _onPressed() async {
-    if (_isExecuting) {
-      // Do nothing while button action is being executed
-      // (to prevent consecutive hits)
-      return;
-    }
-    setState(() => _isExecuting = true);
-    try {
-      final r = await widget.onPressed!.call();
-      widget.whenComplete?.call(r);
-    } on Exception catch (e, s) {
-      widget.onError?.call(e, s);
-    } finally {
-      // Check for presence before execution in case you come back
-      // from a screen transition, etc.
-      if (mounted) {
-        setState(() => _isExecuting = false);
-      }
     }
   }
 }
