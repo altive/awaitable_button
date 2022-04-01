@@ -1,3 +1,8 @@
+## 0.4.1
+
+ - **FIX**: add required to onPressed.
+ - **CHORE**: add web demo link to README.
+
 ## 0.4.0
 - Changed Splash to be hidden during button processing.
 
