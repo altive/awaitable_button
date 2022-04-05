@@ -56,6 +56,6 @@ scripts:
   build:
     run: |
       melos exec -c 1 --dir-exists="web" --flutter -- \
-        flutter build web --web-renderer html
+        flutter build web --web-renderer canvaskit --base-href="/flutter_widgets/"
     # select-package:
     #   dir-exists: lib

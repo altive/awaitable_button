@@ -22,7 +22,7 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter build web --web-renderer html
+      - run: flutter build web --web-renderer canvaskit --base-href="/flutter_widgets/"
 
       - name: Deploy to GithubPages
         uses: peaceiris/actions-gh-pages@v3
