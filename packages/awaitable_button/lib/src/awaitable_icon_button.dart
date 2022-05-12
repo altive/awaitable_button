@@ -18,7 +18,7 @@ class AwaitableIconButton<R> extends StatefulWidget {
   ///
   /// [icon] arguments must not be null.
   const AwaitableIconButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     this.whenComplete,
     this.onError,
@@ -27,11 +27,10 @@ class AwaitableIconButton<R> extends StatefulWidget {
     this.indicatorColor,
     this.indicator,
     required this.icon,
-  })  : assert(
+  }) : assert(
           indicatorColor == null || indicator == null,
           'Cannot specify both',
-        ),
-        super(key: key);
+        );
 
   /// Called when the button is tapped or otherwise activated.
   /// Return values can be used to pass values to [whenComplete].

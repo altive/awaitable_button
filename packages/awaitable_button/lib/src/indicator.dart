@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class Indicator extends StatelessWidget {
   /// Create an Indicator.
   const Indicator({
-    Key? key,
+    super.key,
     this.color,
-  }) : super(key: key);
+  });
 
   /// CircularProgressIndicator Color.
   final Color? color;

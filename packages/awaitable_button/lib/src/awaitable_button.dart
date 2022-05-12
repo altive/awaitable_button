@@ -25,7 +25,7 @@ abstract class AwaitableButton<R> extends StatefulWidget {
   ///
   /// [child] arguments must not be null.
   const AwaitableButton({
-    Key? key,
+    super.key,
     required this.buttonType,
     required this.onPressed,
     this.whenComplete,
@@ -35,11 +35,10 @@ abstract class AwaitableButton<R> extends StatefulWidget {
     this.indicator,
     this.executingChild,
     required this.child,
-  })  : assert(
+  }) : assert(
           indicatorColor == null || indicator == null,
           'Cannot specify both',
-        ),
-        super(key: key);
+        );
 
   /// ButtonType has ElevatedButton, OutlinedButton, TextButton types.
   final ButtonType buttonType;

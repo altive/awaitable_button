@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'awaitable_button.dart';
 import 'button_type.dart';
-import 'extensions.dart';
 
 /// Button with indicator display during processing to prevent consecutive hits.
 ///
@@ -20,25 +17,16 @@ class AwaitableTextButton<R> extends AwaitableButton<R> {
   ///
   /// [child] arguments must not be null.
   const AwaitableTextButton({
-    Key? key,
-    required OnPressed<R> onPressed,
-    WhenComplete<R> whenComplete,
-    OnError onError,
-    ButtonStyle? buttonStyle,
-    Color? indicatorColor,
-    Widget? indicator,
-    Widget? executingChild,
-    required Widget child,
+    super.key,
+    required super.onPressed,
+    super.whenComplete,
+    super.onError,
+    super.buttonStyle,
+    super.indicatorColor,
+    super.indicator,
+    super.executingChild,
+    required super.child,
   }) : super(
-          key: key,
           buttonType: ButtonType.text,
-          onPressed: onPressed,
-          whenComplete: whenComplete,
-          onError: onError,
-          buttonStyle: buttonStyle,
-          indicatorColor: indicatorColor,
-          indicator: indicator,
-          executingChild: executingChild,
-          child: child,
         );
 }
