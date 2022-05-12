@@ -1,3 +1,9 @@
+## 1.0.0
+
+ - **FEAT**: Bump minimum Dart version from 2.16.1 to 2.17.0
+ - **REFACTOR**: Refactoring with Flutter 3.0.0
+ - **REFACTOR**: Depends on the lint package "[altive_lints](https://pub.dev/packages/altive_lints)".
+
 ## 0.4.1
 
  - **FIX**: add required to onPressed.
