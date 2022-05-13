@@ -1,3 +1,5 @@
+## 1.0.1
+
 ## 1.0.0
 
  - **FEAT**: Bump minimum Dart version from 2.16.1 to 2.17.0
