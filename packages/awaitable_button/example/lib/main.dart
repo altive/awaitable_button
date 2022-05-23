@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:awaitable_button/awaitable_button.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AwaitableButton Demo',
+      title: 'Awaitable Button',
       theme: ThemeData(
         useMaterial3: useMaterial3,
         colorSchemeSeed: useMaterial3 ? Colors.green : null,
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('awaitable_button'),
+        title: const Text('Awaitable Button'),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: widget.onFabPressed,
@@ -67,11 +68,33 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
+          Wrap(
+            children: [
+              TextButton(
+                onPressed: () {
+                  launchUrl(
+                      Uri.parse('https://pub.dev/packages/awaitable_button'));
+                },
+                child: const Text('pub.dev'),
+              ),
+              TextButton(
+                onPressed: () {
+                  launchUrl(
+                    Uri.parse(
+                      'https://github.com/altive/flutter_widgets/tree/main/packages/awaitable_button',
+                    ),
+                  );
+                },
+                child: const Text('Repository'),
+              ),
+            ],
+          ),
           _Button(
             title: 'AwaitableElevatedButton',
             description: '''
 Screen transition after processing is completed,
 Success or Failure.''',
+            useDivider: true,
             button: AwaitableElevatedButton<void>(
               onPressed: () async {
                 await Future<void>.delayed(const Duration(seconds: 2));
@@ -172,11 +195,11 @@ Success or Failure.''',
               child: const Text('Before pressing'),
             ),
           ),
-          const Divider(),
           _Button(
             title: 'AwaitableOutlinedButton',
             description: 'It is the same as [AwaitableElevatedButton] '
                 'except for the style.',
+            useDivider: true,
             button: AwaitableOutlinedButton<void>(
               onPressed: () async {
                 await Future<void>.delayed(const Duration(seconds: 2));
@@ -185,11 +208,11 @@ Success or Failure.''',
               child: const Text('Before pressing'),
             ),
           ),
-          const Divider(),
           _Button(
             title: 'AwaitableTextButton',
             description: 'It is the same as [AwaitableElevatedButton] '
                 'except for the style.',
+            useDivider: true,
             button: AwaitableTextButton<void>(
               onPressed: () async {
                 await Future<void>.delayed(const Duration(seconds: 2));
@@ -198,12 +221,12 @@ Success or Failure.''',
               child: const Text('Before pressing'),
             ),
           ),
-          const Divider(),
           if (widget.useMaterial3) ...[
             _Button(
               title: 'AwaitableFilledButton',
               description: 'It is the same as [AwaitableElevatedButton] '
                   'except for the style.',
+              useDivider: true,
               button: AwaitableFilledButton<void>(
                 onPressed: () async {
                   await Future<void>.delayed(const Duration(seconds: 2));
@@ -212,11 +235,11 @@ Success or Failure.''',
                 child: const Text('Before pressing'),
               ),
             ),
-            const Divider(),
             _Button(
               title: 'AwaitableFilledTonalButton',
               description: 'It is the same as [AwaitableElevatedButton] '
                   'except for the style.',
+              useDivider: true,
               button: AwaitableFilledTonalButton<void>(
                 onPressed: () async {
                   await Future<void>.delayed(const Duration(seconds: 2));
@@ -225,11 +248,11 @@ Success or Failure.''',
                 child: const Text('Before pressing'),
               ),
             ),
-            const Divider(),
           ],
           _Button(
             title: 'AwaitableIconButton',
             description: 'Success or Failure handling',
+            useDivider: true,
             button: AwaitableIconButton<void>(
               onPressed: () async {
                 await Future<void>.delayed(const Duration(seconds: 2));
@@ -271,13 +294,7 @@ Success or Failure.''',
               icon: const Icon(Icons.timer),
             ),
           ),
-        ].fold([], (widgets, next) {
-          return widgets
-            ..addAll([
-              const SizedBox(height: 16),
-              next,
-            ]);
-        }),
+        ],
       ),
     );
   }
@@ -288,11 +305,13 @@ class _Button extends StatelessWidget {
     this.title,
     required this.description,
     required this.button,
+    this.useDivider = false,
   });
 
   final String? title;
   final String description;
   final Widget button;
+  final bool useDivider;
 
   @override
   Widget build(BuildContext context) {
@@ -300,6 +319,10 @@ class _Button extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (useDivider) ...[
+          const Divider(),
+          const SizedBox(height: 32),
+        ],
         if (title != null) ...[
           Text(
             title,
@@ -313,6 +336,7 @@ class _Button extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         button,
+        const SizedBox(height: 32),
       ],
     );
   }
