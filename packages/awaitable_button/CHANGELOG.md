@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: add `AwaitableFilledButton` and `AwaitableFilledTonalButton` representing `FilledButton` and `FilledTonalButton` in Material 3. ([d94ac0f7](https://github.com/altive/flutter_widgets/commit/d94ac0f75047404b28c5f116c099badbc69c1fc1))
+
 ## 1.0.1
  - Update example.
 
