@@ -7,3 +7,7 @@
 `packages/awaitable_buttion`
 
 Button with indicator display during processing to prevent consecutive hits.
+
+## Development
+
+Develop using the latest stable version of Flutter SDK.
