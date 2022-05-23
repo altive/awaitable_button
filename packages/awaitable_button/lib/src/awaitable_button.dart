@@ -147,6 +147,30 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>>
                   ),
           child: child,
         );
+      case ButtonType.filled:
+        return ElevatedButton(
+          onPressed: p,
+          style: ElevatedButton.styleFrom(
+            onPrimary: Theme.of(context).colorScheme.onPrimary,
+            primary: Theme.of(context).colorScheme.primary,
+          ).merge(widget.buttonStyle).copyWith(
+                splashFactory: splashFactory,
+                elevation: ButtonStyleButton.allOrNull(0),
+              ),
+          child: child,
+        );
+      case ButtonType.filledTonal:
+        return ElevatedButton(
+          onPressed: p,
+          style: ElevatedButton.styleFrom(
+            onPrimary: Theme.of(context).colorScheme.onSecondaryContainer,
+            primary: Theme.of(context).colorScheme.secondaryContainer,
+          ).merge(widget.buttonStyle).copyWith(
+                splashFactory: splashFactory,
+                elevation: ButtonStyleButton.allOrNull(0),
+              ),
+          child: child,
+        );
     }
   }
 }

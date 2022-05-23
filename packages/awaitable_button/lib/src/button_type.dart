@@ -8,4 +8,10 @@ enum ButtonType {
 
   /// Use TextButton
   text,
+
+  /// Use FilledButton
+  filled,
+
+  /// Use FilledTonalButton
+  filledTonal,
 }
