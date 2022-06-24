@@ -13,9 +13,13 @@ import 'button_type.dart';
 /// If [buttonStyle] is not specified, the value set in Theme
 /// Use `ElevatedButtonThemeData` in `Theme.of(context)`.
 class AwaitableElevatedButton<R> extends AwaitableButton<R> {
-  /// Create an AwaitableButton.
+  /// Create an AwaitableElevatedButton.
   ///
-  /// [child] arguments must not be null.
+  /// [onPressed] and [child] arguments must not be null.
+  /// If [indicator] is specified,
+  /// [indicatorColor] and [indicatorSize] cannot be specified.
+  /// If both [indicator] and [indicatorSize] are null,
+  /// the size of the Indicator is `Size.square(24)`.
   const AwaitableElevatedButton({
     super.key,
     required super.onPressed,
@@ -23,6 +27,7 @@ class AwaitableElevatedButton<R> extends AwaitableButton<R> {
     super.onError,
     super.buttonStyle,
     super.indicatorColor,
+    super.indicatorSize,
     super.indicator,
     super.executingChild,
     required super.child,

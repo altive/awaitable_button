@@ -32,11 +32,16 @@ abstract class AwaitableButton<R> extends StatefulWidget {
     this.onError,
     this.buttonStyle,
     this.indicatorColor,
+    this.indicatorSize,
     this.indicator,
     this.executingChild,
     required this.child,
-  }) : assert(
+  })  : assert(
           indicatorColor == null || indicator == null,
+          'Cannot specify both',
+        ),
+        assert(
+          indicatorSize == null || indicator == null,
           'Cannot specify both',
         );
 
@@ -62,6 +67,12 @@ abstract class AwaitableButton<R> extends StatefulWidget {
   /// Indicator color during asynchronous processing.
   /// Cannot be specified if [indicator] is specified.
   final Color? indicatorColor;
+
+  /// Indicator size during asynchronous processing.
+  /// Cannot be specified if [indicator] is specified.
+  /// If this field and the `indicator` are null,
+  /// then `Size.square(24)` is used.
+  final Size? indicatorSize;
 
   /// Widget to display as an indicator during asynchronous processing.
   /// Cannot be specified when [indicatorColor] is specified.
@@ -98,6 +109,7 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>>
               (widget.buttonType.isElevated
                   ? Theme.of(context).colorScheme.onPrimary
                   : Theme.of(context).colorScheme.primary),
+          size: widget.indicatorSize ?? const Size.square(24),
         );
     final executingIcon = widget.executingChild;
     final child = AnimatedSwitcher(

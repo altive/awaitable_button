@@ -16,9 +16,13 @@ import 'button_type.dart';
 /// look like a `FilledTonalButton` will be used internally.
 /// https://github.com/flutter/flutter/issues/99022#issuecomment-1102992302
 class AwaitableFilledTonalButton<R> extends AwaitableButton<R> {
-  /// Create an AwaitableButton.
+  /// Create an AwaitableFilledTonalButton.
   ///
-  /// [child] arguments must not be null.
+  /// [onPressed] and [child] arguments must not be null.
+  /// If [indicator] is specified,
+  /// [indicatorColor] and [indicatorSize] cannot be specified.
+  /// If both [indicator] and [indicatorSize] are null,
+  /// the size of the Indicator is `Size.square(24)`.
   const AwaitableFilledTonalButton({
     super.key,
     required super.onPressed,
@@ -26,6 +30,7 @@ class AwaitableFilledTonalButton<R> extends AwaitableButton<R> {
     super.onError,
     super.buttonStyle,
     super.indicatorColor,
+    super.indicatorSize,
     super.indicator,
     super.executingChild,
     required super.child,

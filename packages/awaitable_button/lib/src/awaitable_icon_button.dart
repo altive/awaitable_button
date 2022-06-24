@@ -16,7 +16,11 @@ import 'indicator.dart';
 class AwaitableIconButton<R> extends StatefulWidget {
   /// Create an AwaitableIconButton.
   ///
-  /// [icon] arguments must not be null.
+  /// [onPressed] and [icon] arguments must not be null.
+  /// If [indicator] is specified,
+  /// [indicatorColor] and [indicatorSize] cannot be specified.
+  /// If both [indicator] and [indicatorSize] are null,
+  /// the size of the Indicator is `Size.square(24)`.
   const AwaitableIconButton({
     super.key,
     required this.onPressed,
@@ -25,10 +29,15 @@ class AwaitableIconButton<R> extends StatefulWidget {
     this.executingIcon,
     this.iconSize,
     this.indicatorColor,
+    this.indicatorSize,
     this.indicator,
     required this.icon,
-  }) : assert(
+  })  : assert(
           indicatorColor == null || indicator == null,
+          'Cannot specify both',
+        ),
+        assert(
+          indicatorSize == null || indicator == null,
           'Cannot specify both',
         );
 
@@ -49,6 +58,12 @@ class AwaitableIconButton<R> extends StatefulWidget {
   /// Indicator color during asynchronous processing.
   /// Cannot be specified if [indicator] is specified.
   final Color? indicatorColor;
+
+  /// Indicator size during asynchronous processing.
+  /// Cannot be specified if [indicator] is specified.
+  /// If this field and the `indicator` are null,
+  /// then `Size.square(24)` is used.
+  final Size? indicatorSize;
 
   /// Widget to display as an indicator during asynchronous processing.
   /// Cannot be specified when [indicatorColor] is specified.
@@ -84,6 +99,7 @@ class _AwaitableIconButtonState<R> extends State<AwaitableIconButton<R>>
     final indicator = widget.indicator ??
         Indicator(
           color: widget.indicatorColor ?? Theme.of(context).colorScheme.primary,
+          size: widget.indicatorSize ?? const Size.square(24),
         );
     final executingIcon = widget.executingIcon;
     return IconButton(
