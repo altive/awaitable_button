@@ -51,6 +51,10 @@ Widget build(BuildContext context) {
       // Optional
       indicator: CircularProgressIndicator(),
       // Optional
+      indicatorColor: Colors.green,
+      // Optional
+      indicatorSize: Size.square(24),
+      // Optional
       executingChild: const Text('Executing...'),
       // Required
       child: const Text('Button'),
@@ -72,6 +76,18 @@ Widget build(BuildContext context) {
       whenComplete: (value) {
         // do something
       },
+      // Optional
+      onError: (exception, stackTrace) {
+        // do something
+      },
+      // Optional
+      iconSize: 24,
+      // Optional
+      indicator: CircularProgressIndicator(),
+      // Optional
+      indicatorColor: Colors.green,
+      // Optional
+      indicatorSize: Size.square(24),
       // Optional
       executingIcon: const Icon(Icons.timer_sharp),
       // Required
