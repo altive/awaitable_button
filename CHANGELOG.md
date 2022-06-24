@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2022-06-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`awaitable_button` - `v1.2.0`](#awaitable_button---v120)
+
+---
+
+#### `awaitable_button` - `v1.2.0`
+
+ - **FEAT**: add indicatorSize parameter to AwaitableButton. ([5bb188e8](https://github.com/altive/flutter_widgets/commit/5bb188e8d506383ebb2706eec7ac87638b10a71f))
+
+
 ## 2022-05-23
 
 ### Changes
