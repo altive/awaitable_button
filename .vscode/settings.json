@@ -41,8 +41,6 @@
 			"source.fixAll",
 		],
 	},
-	// 使用するFlutter SDKのパスを指定。
-	"dart.flutterSdkPath": ".fvm/flutter_sdk",
 	// 検索対象から生成ファイルを除外する
 	"search.exclude": {
 		"**/.fvm": true,
