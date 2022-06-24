@@ -28,6 +28,11 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: useMaterial3,
         colorSchemeSeed: useMaterial3 ? Colors.green : null,
         primarySwatch: useMaterial3 ? null : Colors.blue,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(48),
+          ),
+        ),
       ),
       home: MyHomePage(
         useMaterial3: useMaterial3,
