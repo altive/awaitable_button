@@ -7,6 +7,7 @@ class Indicator extends StatelessWidget {
     super.key,
     this.color,
     this.size,
+    this.strokeWidth,
   });
 
   /// CircularProgressIndicator color.
@@ -15,13 +16,16 @@ class Indicator extends StatelessWidget {
   /// CircularProgressIndicator size.
   final Size? size;
 
+  /// CircularProgressIndicator strokeWidth.
+  final double? strokeWidth;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: size,
-      child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(color),
-        strokeWidth: 2,
+      size: size ?? const Size.square(24),
+      child: CircularProgressIndicator.adaptive(
+        valueColor: color == null ? null : AlwaysStoppedAnimation(color),
+        strokeWidth: strokeWidth ?? 4,
       ),
     );
   }

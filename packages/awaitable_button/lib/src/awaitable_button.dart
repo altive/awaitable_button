@@ -33,16 +33,16 @@ abstract class AwaitableButton<R> extends StatefulWidget {
     this.buttonStyle,
     this.indicatorColor,
     this.indicatorSize,
+    this.indicatorStrokeWidth,
     this.indicator,
     this.executingChild,
     required this.child,
-  })  : assert(
-          indicatorColor == null || indicator == null,
-          'Cannot specify both',
-        ),
-        assert(
-          indicatorSize == null || indicator == null,
-          'Cannot specify both',
+  }) : assert(
+          indicator == null ||
+              (indicatorColor == null &&
+                  indicatorSize == null &&
+                  indicatorStrokeWidth == null),
+          '''You cannot specify `(custom)indicator` and any other indicator at the same time. Either `(custom)indicator` or all other indicator parameters must be null.''',
         );
 
   /// ButtonType has ElevatedButton, OutlinedButton, TextButton types.
@@ -65,6 +65,8 @@ abstract class AwaitableButton<R> extends StatefulWidget {
   final ButtonStyle? buttonStyle;
 
   /// Indicator color during asynchronous processing.
+  /// If null, `color` and `circularTrackColor` of
+  /// `ThemeData.progressIndicatorTheme` are used.
   /// Cannot be specified if [indicator] is specified.
   final Color? indicatorColor;
 
@@ -73,6 +75,12 @@ abstract class AwaitableButton<R> extends StatefulWidget {
   /// If this field and the `indicator` are null,
   /// then `Size.square(24)` is used.
   final Size? indicatorSize;
+
+  /// Indicator strokeWidth during asynchronous processing.
+  /// Cannot be specified if [indicator] is specified.
+  /// If this field and the `indicator` are null,
+  /// then `4` is used.
+  final double? indicatorStrokeWidth;
 
   /// Widget to display as an indicator during asynchronous processing.
   /// Cannot be specified when [indicatorColor] is specified.
@@ -105,11 +113,9 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>>
   Widget build(BuildContext context) {
     final indicator = widget.indicator ??
         Indicator(
-          color: widget.indicatorColor ??
-              (widget.buttonType.isElevated
-                  ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).colorScheme.primary),
-          size: widget.indicatorSize ?? const Size.square(24),
+          color: widget.indicatorColor,
+          size: widget.indicatorSize,
+          strokeWidth: widget.indicatorStrokeWidth,
         );
     final executingIcon = widget.executingChild;
     final child = AnimatedSwitcher(

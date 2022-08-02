@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('AwaitableElevatedButton', () {
-    final widget = MaterialApp(
+  group('Basic tests', () {
+    final app = MaterialApp(
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -27,7 +27,7 @@ void main() {
         /// AwaitableButtonが非同期処理を持つため、runAsyncでラップする必要がある
         await tester.runAsync(() async {
           // テスト用のWidgetツリーを構築
-          await tester.pumpWidget(widget);
+          await tester.pumpWidget(app);
 
           // テストターゲットWidgetを検索
           final target = find.byType(AwaitableElevatedButton<void>);
@@ -58,7 +58,7 @@ void main() {
       /// AwaitableButtonが非同期処理を持つため、runAsyncでラップする必要がある
       await tester.runAsync(() async {
         // テスト用のWidgetツリーを構築
-        await tester.pumpWidget(widget);
+        await tester.pumpWidget(app);
 
         // テストターゲットWidgetを検索
         final target = find.byType(AwaitableElevatedButton<void>);
@@ -79,7 +79,7 @@ void main() {
       /// AwaitableButtonが非同期処理を持つため、runAsyncでラップする必要がある
       await tester.runAsync(() async {
         // テスト用のWidgetツリーを構築
-        await tester.pumpWidget(widget);
+        await tester.pumpWidget(app);
 
         // テストターゲットWidgetを検索
         final target = find.byType(AwaitableElevatedButton<void>);
@@ -95,6 +95,47 @@ void main() {
         final sizeAfterTap = tester.getSize(target);
         expect(sizeAfterTap.height, equals(48));
       });
+    });
+
+    group('Parameter tests', () {
+      final app = MaterialApp(
+        theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(48),
+            ),
+          ),
+        ),
+        home: Scaffold(
+          body: AwaitableElevatedButton<void>(
+            onPressed: () async {
+              await Future<void>.delayed(const Duration(seconds: 4));
+            },
+            indicatorColor: Colors.red,
+            indicatorSize: const Size(16, 16),
+            indicatorStrokeWidth: 8,
+            child: const Text('Test Button'),
+          ),
+        ),
+      );
+      testWidgets(
+        'indicatorColor, indicatorSize, indicatorStrokeWidth',
+        (WidgetTester tester) async {
+          /// AwaitableButtonが非同期処理を持つため、runAsyncでラップする必要がある
+          await tester.runAsync(() async {
+            // テスト用のWidgetツリーを構築
+            await tester.pumpWidget(app);
+
+            // テストターゲットWidgetを検索
+            final target = find.byType(AwaitableElevatedButton<void>);
+            final button = tester.widget<AwaitableElevatedButton<void>>(target);
+
+            expect(button.indicatorColor, equals(Colors.red));
+            expect(button.indicatorSize, equals(const Size(16, 16)));
+            expect(button.indicatorStrokeWidth, equals(8));
+          });
+        },
+      );
     });
   });
 }

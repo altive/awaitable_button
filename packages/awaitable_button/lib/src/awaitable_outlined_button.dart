@@ -16,10 +16,15 @@ class AwaitableOutlinedButton<R> extends AwaitableButton<R> {
   /// Create an AwaitableOutlinedButton.
   ///
   /// [onPressed] and [child] arguments must not be null.
+  ///
   /// If [indicator] is specified,
   /// [indicatorColor] and [indicatorSize] cannot be specified.
+  ///
   /// If both [indicator] and [indicatorSize] are null,
   /// the size of the Indicator is `Size.square(24)`.
+  ///
+  /// If both [indicator] and [indicatorColor] are null, `color` and
+  /// `circularTrackColor` of `ThemeData.progressIndicatorTheme` are used.
   const AwaitableOutlinedButton({
     super.key,
     required super.onPressed,
@@ -28,6 +33,7 @@ class AwaitableOutlinedButton<R> extends AwaitableButton<R> {
     super.buttonStyle,
     super.indicatorColor,
     super.indicatorSize,
+    super.indicatorStrokeWidth,
     super.indicator,
     super.executingChild,
     required super.child,

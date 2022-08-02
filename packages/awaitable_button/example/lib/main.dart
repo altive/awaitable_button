@@ -33,6 +33,10 @@ class _MyAppState extends State<MyApp> {
             minimumSize: const Size.fromHeight(48),
           ),
         ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Colors.yellow,
+          circularTrackColor: Colors.orange,
+        ),
       ),
       home: MyHomePage(
         useMaterial3: useMaterial3,
