@@ -1,3 +1,9 @@
+## 1.3.0
+
+ - **FIX**: add async-await. ([13f34e40](https://github.com/altive/flutter_widgets/commit/13f34e4037ade48df51ddf0abc1f3e92294bf096))
+ - **FIX**: remove android:icon="@mipmap/ic_launcher” from example AndroidManifest. ([7b3fb331](https://github.com/altive/flutter_widgets/commit/7b3fb331a4a946737158116a444d8c390f549d60))
+ - **FEAT**: add indicatorStrokeWidth parameter. ([521a5853](https://github.com/altive/flutter_widgets/commit/521a5853a71b26561fb61b99f17f11814fa24c64))
+
 ## 1.2.0
 
  - **FEAT**: add indicatorSize parameter to AwaitableButton. ([5bb188e8](https://github.com/altive/flutter_widgets/commit/5bb188e8d506383ebb2706eec7ac87638b10a71f))

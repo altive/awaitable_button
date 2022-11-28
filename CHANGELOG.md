@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2022-11-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`awaitable_button` - `v1.3.0`](#awaitable_button---v130)
+
+---
+
+#### `awaitable_button` - `v1.3.0`
+
+ - **FIX**: add async-await. ([13f34e40](https://github.com/altive/flutter_widgets/commit/13f34e4037ade48df51ddf0abc1f3e92294bf096))
+ - **FIX**: remove android:icon="@mipmap/ic_launcher” from example AndroidManifest. ([7b3fb331](https://github.com/altive/flutter_widgets/commit/7b3fb331a4a946737158116a444d8c390f549d60))
+ - **FEAT**: add indicatorStrokeWidth parameter. ([521a5853](https://github.com/altive/flutter_widgets/commit/521a5853a71b26561fb61b99f17f11814fa24c64))
+
+
 ## 2022-06-24
 
 ### Changes
