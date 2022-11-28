@@ -16,7 +16,7 @@ import 'indicator.dart';
 class AwaitableIconButton<R> extends StatefulWidget {
   /// Create an AwaitableIconButton.
   ///
-  /// [onPressed] and [child] arguments must not be null.
+  /// [onPressed] and [icon] arguments must not be null.
   ///
   /// If [indicator] is specified,
   /// [indicatorColor] and [indicatorSize] cannot be specified.

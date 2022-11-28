@@ -5,10 +5,6 @@ import 'button_type.dart';
 import 'extensions.dart';
 import 'indicator.dart';
 
-extension on ButtonType {
-  bool get isElevated => this == ButtonType.elevated;
-}
-
 /// Button with indicator display during processing to prevent consecutive hits.
 ///
 /// Setting an asynchronous function to [onPressed] will display an indicator
@@ -169,8 +165,8 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>>
         return ElevatedButton(
           onPressed: p,
           style: ElevatedButton.styleFrom(
-            onPrimary: Theme.of(context).colorScheme.onPrimary,
-            primary: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+            backgroundColor: Theme.of(context).colorScheme.primary,
           ).merge(widget.buttonStyle).copyWith(
                 splashFactory: splashFactory,
                 elevation: ButtonStyleButton.allOrNull(0),
@@ -181,8 +177,8 @@ class _AwaitableButtonState<R> extends State<AwaitableButton<R>>
         return ElevatedButton(
           onPressed: p,
           style: ElevatedButton.styleFrom(
-            onPrimary: Theme.of(context).colorScheme.onSecondaryContainer,
-            primary: Theme.of(context).colorScheme.secondaryContainer,
+            foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           ).merge(widget.buttonStyle).copyWith(
                 splashFactory: splashFactory,
                 elevation: ButtonStyleButton.allOrNull(0),
