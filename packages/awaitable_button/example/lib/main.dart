@@ -80,15 +80,16 @@ class _MyHomePageState extends State<MyHomePage> {
           Wrap(
             children: [
               TextButton(
-                onPressed: () {
-                  launchUrl(
-                      Uri.parse('https://pub.dev/packages/awaitable_button'));
+                onPressed: () async {
+                  await launchUrl(
+                    Uri.parse('https://pub.dev/packages/awaitable_button'),
+                  );
                 },
                 child: const Text('pub.dev'),
               ),
               TextButton(
-                onPressed: () {
-                  launchUrl(
+                onPressed: () async {
+                  await launchUrl(
                     Uri.parse(
                       'https://github.com/altive/flutter_widgets/tree/main/packages/awaitable_button',
                     ),
@@ -108,8 +109,8 @@ Success or Failure.''',
               onPressed: () async {
                 await Future<void>.delayed(const Duration(seconds: 2));
               },
-              whenComplete: (_) {
-                Navigator.of(context).push<void>(
+              whenComplete: (_) async {
+                await Navigator.of(context).push<void>(
                   MaterialPageRoute(
                     builder: (context) {
                       return Scaffold(
@@ -150,8 +151,8 @@ Success or Failure.''',
                   return 'Failed';
                 }
               },
-              whenComplete: (value) {
-                showDialog<void>(
+              whenComplete: (value) async {
+                await showDialog<void>(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
@@ -185,8 +186,8 @@ Success or Failure.''',
                   const SnackBar(content: Text('Failed.')),
                 );
               },
-              whenComplete: (_) {
-                showDialog<void>(
+              whenComplete: (_) async {
+                await showDialog<void>(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
@@ -269,8 +270,8 @@ Success or Failure.''',
                   throw Exception();
                 }
               },
-              whenComplete: (_) {
-                showDialog<void>(
+              whenComplete: (_) async {
+                await showDialog<void>(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
