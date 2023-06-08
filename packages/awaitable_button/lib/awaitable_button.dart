@@ -1,3 +1,5 @@
+/// A button that displays an indicator during asynchronous processing and
+/// allows callbacks to be executed after completion or exception catch.
 library awaitable_button;
 
 export 'src/awaitable_elevated_button.dart';

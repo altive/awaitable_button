@@ -336,13 +336,13 @@ class _Button extends StatelessWidget {
         if (title != null) ...[
           Text(
             title,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 16),
         ],
         Text(
           description,
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
         const SizedBox(height: 16),
         button,
