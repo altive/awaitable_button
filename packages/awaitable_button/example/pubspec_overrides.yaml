@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: awaitable_button
+dependency_overrides:
+  awaitable_button:
+    path: ..
