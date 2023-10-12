@@ -7,14 +7,14 @@ on:
 
 defaults:
   run:
-    working-directory: packages/awaitable_button/example
+    working-directory: example
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - uses: subosito/flutter-action@v2
         with:
@@ -22,10 +22,10 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter build web --web-renderer canvaskit --base-href="/flutter_widgets/"
+      - run: flutter build web --web-renderer canvaskit --base-href="/awaitable_button/"
 
       - name: Deploy to GithubPages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/awaitable_button/example/build/web
+          publish_dir: ./example/build/web
