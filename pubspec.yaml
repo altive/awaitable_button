@@ -3,8 +3,13 @@ description: >
   A button that displays an indicator during asynchronous processing and
   allows callbacks to be executed after completion or exception catch.
 version: 1.3.0
-homepage: https://github.com/altive/awaitable_button/blob/main/packages/awaitable_button/README.md
+homepage: https://altive.dev
 repository: https://github.com/altive/awaitable_button
+issue_tracker: https://github.com/altive/awaitable_button/issues
+topics:
+  - ui
+  - widgets
+  - animation
 
 environment:
   sdk: ^3.0.0
