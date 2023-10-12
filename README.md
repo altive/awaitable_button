@@ -8,7 +8,7 @@ Button with indicator display during processing to prevent consecutive hits.
 
 You can try out the interactive buttons on the demo page below.
 
-https://altive.github.io/flutter_widgets/
+https://altive.github.io/awaitable_button/
 
 ## Getting started
 
