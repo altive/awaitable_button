@@ -14,7 +14,7 @@ dependencies:
   url_launcher: ^6.1.2
 
 dev_dependencies:
-  altive_lints: ^1.5.0
+  altive_lints: ^1.8.1
   flutter_test:
     sdk: flutter
 
