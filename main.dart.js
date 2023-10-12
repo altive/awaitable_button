@@ -31209,7 +31209,7 @@ A.a1E.prototype={
 $0(){var s=0,r=A.Y(t.H)
 var $async$$0=A.Z(function(a,b){if(a===1)return A.V(b,r)
 while(true)switch(s){case 0:s=2
-return A.a1(A.a5e(A.hm("https://github.com/altive/awaitable_button/tree/main/packages/awaitable_button",0,null)),$async$$0)
+return A.a1(A.a5e(A.hm("https://github.com/altive/awaitable_button",0,null)),$async$$0)
 case 2:return A.W(null,r)}})
 return A.X($async$$0,r)},
 $S:5}
