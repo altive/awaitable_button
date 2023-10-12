@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () async {
                   await launchUrl(
                     Uri.parse(
-                      'https://github.com/altive/flutter_widgets/tree/main/packages/awaitable_button',
+                      'https://github.com/altive/awaitable_button/tree/main/packages/awaitable_button',
                     ),
                   );
                 },

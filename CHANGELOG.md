@@ -1,108 +1,48 @@
-# Change Log
-
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-## 2022-11-28
-
-### Changes
-
----
-
-Packages with breaking changes:
-
- - There are no breaking changes in this release.
-
-Packages with other changes:
-
- - [`awaitable_button` - `v1.3.0`](#awaitable_button---v130)
-
----
-
-#### `awaitable_button` - `v1.3.0`
+## 1.3.0
 
  - **BUILD**: Bump minimum Dart version from 2.17.0 to 2.18.4
- - **FEAT**: add indicatorStrokeWidth parameter. ([521a5853](https://github.com/altive/flutter_widgets/commit/521a5853a71b26561fb61b99f17f11814fa24c64))
+ - **FEAT**: add indicatorStrokeWidth parameter. ([521a5853](https://github.com/altive/awaitable_button/commit/521a5853a71b26561fb61b99f17f11814fa24c64))
 
+## 1.2.0
 
-## 2022-06-24
+ - **FEAT**: add indicatorSize parameter to AwaitableButton. ([5bb188e8](https://github.com/altive/awaitable_button/commit/5bb188e8d506383ebb2706eec7ac87638b10a71f))
 
-### Changes
+## 1.1.0
 
----
+ - **FEAT**: add `AwaitableFilledButton` and `AwaitableFilledTonalButton` representing `FilledButton` and `FilledTonalButton` in Material 3. ([d94ac0f7](https://github.com/altive/awaitable_button/commit/d94ac0f75047404b28c5f116c099badbc69c1fc1))
 
-Packages with breaking changes:
+## 1.0.1
+ - Update example.
 
- - There are no breaking changes in this release.
+## 1.0.0
 
-Packages with other changes:
+ - **BUILD**: Bump minimum Dart version from 2.16.1 to 2.17.0
+ - **REFACTOR**: Refactoring with Flutter 3.0.0
+ - **REFACTOR**: Depends on the lint package "[altive_lints](https://pub.dev/packages/altive_lints)".
 
- - [`awaitable_button` - `v1.2.0`](#awaitable_button---v120)
+## 0.4.1
 
----
+ - **FIX**: add required to onPressed.
+ - **CHORE**: add web demo link to README.
 
-#### `awaitable_button` - `v1.2.0`
+## 0.4.0
+- Changed Splash to be hidden during button processing.
 
- - **FEAT**: add indicatorSize parameter to AwaitableButton. ([5bb188e8](https://github.com/altive/flutter_widgets/commit/5bb188e8d506383ebb2706eec7ac87638b10a71f))
+## 0.3.1
 
+- Added `AwaitableOutlinedButton` .
+- Added `onError` to `AwaitableIconButton`.
 
-## 2022-05-23
+## 0.2.0
 
-### Changes
+- Added `onError` .
 
----
+## 0.1.0
 
-Packages with breaking changes:
+- Removed `AwaitableButton` .
 
- - There are no breaking changes in this release.
+- Added `AwaitableElevatedButton` and `AwaitableTextButton` .
 
-Packages with other changes:
+## 0.0.1
 
- - [`awaitable_button` - `v1.1.0`](#awaitable_button---v110)
-
----
-
-#### `awaitable_button` - `v1.1.0`
-
- - **FEAT**: add `AwaitableFilledButton` and `AwaitableFilledTonalButton` representing `FilledButton` and `FilledTonalButton` in Material 3. ([d94ac0f7](https://github.com/altive/flutter_widgets/commit/d94ac0f75047404b28c5f116c099badbc69c1fc1))
-
-
-## 2022-05-13
-
-### Changes
-
----
-
-Packages with breaking changes:
-
- - There are no breaking changes in this release.
-
-Packages with other changes:
-
- - [`awaitable_button` - `v1.0.1`](#awaitable_button---v101)
-
----
-
-#### `awaitable_button` - `v1.0.1`
-
-
-## 2022-05-12
-
-### Changes
-
----
-
-Packages with breaking changes:
-
- - There are no breaking changes in this release.
-
-Packages with other changes:
-
- - [`awaitable_button` - `v1.0.0`](#awaitable_button---v100)
-
----
-
-#### `awaitable_button` - `v1.0.0`
-
- - **REFACTOR**: use altive_lints. ([75fa5f8e](https://github.com/altive/flutter_widgets/commit/75fa5f8e0546b823ca17038852d70bb68c49eb8f))
-
+Initial release

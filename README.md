@@ -1,13 +1,97 @@
-# Altive Flutter Widgets
+# Awaitable Button
 
-[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
-
-## awaitable_buttion
-
-`packages/awaitable_buttion`
+## Features
 
 Button with indicator display during processing to prevent consecutive hits.
 
-## Development
+## Web demo for awaitable_button/example
 
-Develop using the latest stable version of Flutter SDK.
+You can try out the interactive buttons on the demo page below.
+
+https://altive.github.io/flutter_widgets/
+
+## Getting started
+
+```pubspec.yaml
+awaitable_button: any
+```
+
+## Usage
+```dart
+import 'package:awaitable_button/awaitable_button.dart';
+```
+
+This package includes the following buttons.
+Use them according to your style.
+
+- `AwaitableElevatedButton`
+- `AwaitableOutlinedButton`
+- `AwaitableTextButton`
+- `AwaitableFilledButton`
+- `AwaitableFilledTonalButton`
+
+```dart
+@override
+Widget build(BuildContext context) {
+    return AwaitableElevatedButton<String>(
+      // Required
+      onPressed: () {
+        // do something
+      },
+      // Optional
+      whenComplete: (value) {
+        // do something
+      },
+      // Optional
+      onError: (exception, stackTrace) {
+        // do something
+      },
+      // Optional
+      buttonStyle: ElevatedButton.styleFrom(),
+      // Optional
+      indicator: CircularProgressIndicator(),
+      // Optional
+      indicatorColor: Colors.green,
+      // Optional
+      indicatorSize: Size.square(24),
+      // Optional
+      executingChild: const Text('Executing...'),
+      // Required
+      child: const Text('Button'),
+    );
+}
+```
+
+`AwaitableOutlinedButton`, `AwaitableTextButton`, `AwaitableFilledButton` and `AwaitableFilledTonalButton` is exactly the same as for `AwaitableElevatedButton`.
+
+```dart
+@override
+Widget build(BuildContext context) {
+    return AwaitableIconButton<String>(
+      // Required
+      onPressed: () {
+        // do something
+      },
+      // Optional
+      whenComplete: (value) {
+        // do something
+      },
+      // Optional
+      onError: (exception, stackTrace) {
+        // do something
+      },
+      // Optional
+      iconSize: 24,
+      // Optional
+      indicator: CircularProgressIndicator(),
+      // Optional
+      indicatorColor: Colors.green,
+      // Optional
+      indicatorSize: Size.square(24),
+      // Optional
+      executingIcon: const Icon(Icons.timer_sharp),
+      // Required
+      icon: const Icon(Icons.timer),
+    );
+}
+```

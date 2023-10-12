@@ -8,7 +8,8 @@
             "name": "awaitable_button example",
             "request": "launch",
             "type": "dart",
-            "program": "packages/awaitable_button/example/lib/main.dart",
+            "cwd": "example",
+            "program": "lib/main.dart",
             "flutterMode": "debug",
             "args": []
         },
