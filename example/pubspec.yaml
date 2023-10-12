@@ -11,7 +11,7 @@ dependencies:
     path: ../
   flutter:
     sdk: flutter
-  url_launcher: ^6.1.2
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   altive_lints: ^1.5.0
