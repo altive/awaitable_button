@@ -29,7 +29,7 @@ jobs:
       - run: flutter build web --web-renderer canvaskit --base-href="/awaitable_button/"
 
       - name: Deploy to GithubPages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./example/build/web
