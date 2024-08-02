@@ -26,7 +26,11 @@ class _MyAppState extends State<MyApp> {
       title: 'Awaitable Button',
       theme: ThemeData(
         useMaterial3: useMaterial3,
+        // Hard coding is not a problem because the colors are defined in
+        // `ThemeData`. Therefore, avoid_hardcoded_color is ignored.
+        // ignore: avoid_hardcoded_color
         colorSchemeSeed: useMaterial3 ? Colors.green : null,
+        // ignore: avoid_hardcoded_color
         primarySwatch: useMaterial3 ? null : Colors.blue,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -34,7 +38,9 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
+          // ignore: avoid_hardcoded_color
           color: Colors.yellow,
+          // ignore: avoid_hardcoded_color
           circularTrackColor: Colors.orange,
         ),
       ),
