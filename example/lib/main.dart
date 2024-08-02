@@ -26,6 +26,8 @@ class _MyAppState extends State<MyApp> {
       title: 'Awaitable Button',
       theme: ThemeData(
         useMaterial3: useMaterial3,
+        // Hard coding is not a problem because the colors are defined in
+        // `ThemeData`. Therefore, avoid_hardcoded_color is ignored.
         // ignore: avoid_hardcoded_color
         colorSchemeSeed: useMaterial3 ? Colors.green : null,
         // ignore: avoid_hardcoded_color
