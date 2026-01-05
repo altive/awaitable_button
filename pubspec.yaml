@@ -19,7 +19,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  altive_lints: ^1.11.1
+  altive_lints: ^2.1.0
   flutter_test:
     sdk: flutter
 

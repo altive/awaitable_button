@@ -1,16 +1,17 @@
-// ignore_for_file: public_member_api_docs
-
 import 'dart:math';
 
 import 'package:awaitable_button/awaitable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Main entry point of the example app.
 void main() {
   runApp(const MyApp());
 }
 
+/// The example app widget.
 class MyApp extends StatefulWidget {
+  /// Create a MyApp.
   const MyApp({super.key});
 
   @override
@@ -28,9 +29,11 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: useMaterial3,
         // Hard coding is not a problem because the colors are defined in
         // `ThemeData`. Therefore, avoid_hardcoded_color is ignored.
-        // ignore: avoid_hardcoded_color
+        // ignore: altive_lints/avoid_hardcoded_color
         colorSchemeSeed: useMaterial3 ? Colors.green : null,
-        // ignore: avoid_hardcoded_color
+        // Hard coding is not a problem because the colors are defined in
+        // `ThemeData`. Therefore, avoid_hardcoded_color is ignored.
+        // ignore: altive_lints/avoid_hardcoded_color
         primarySwatch: useMaterial3 ? null : Colors.blue,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -38,9 +41,11 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
-          // ignore: avoid_hardcoded_color
+          // Colors are hardcoded for indicator appearance demonstration.
+          // ignore: altive_lints/avoid_hardcoded_color
           color: Colors.yellow,
-          // ignore: avoid_hardcoded_color
+          // Colors are hardcoded for indicator appearance demonstration.
+          // ignore: altive_lints/avoid_hardcoded_color
           circularTrackColor: Colors.orange,
         ),
       ),
@@ -54,15 +59,19 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+/// The home page of the example app.
 class MyHomePage extends StatefulWidget {
+  /// Create a MyHomePage.
   const MyHomePage({
     super.key,
     required this.useMaterial3,
     required this.onFabPressed,
   });
 
+  /// Whether to use Material 3.
   final bool useMaterial3;
 
+  /// Callback when the FAB is pressed.
   final VoidCallback onFabPressed;
 
   @override
